@@ -1,0 +1,33 @@
+Public Class Form1
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'PROGRAM TO PREPARE WEEKLY PAYROLL
+        Dim f As String = "{0,-15}{1,12:c2}{2,13}{3,10:c2}{4,11:c2}{5,8:c2}"
+        'enm= EMPLOYEE NAME, pr= RATE OF PAY, hw= HOURS WORKED, gp=  GROSS PAY, ded= DEDUCTIONS, np= NET PAY, ot= OVERTIME
+        Dim enm As String
+        Dim pr, hw, gp, ded, np, ot As Decimal
+        ListBox1.Items.Add("RABIUL HASAN")
+        ListBox1.Items.Add(" ")
+        ListBox1.Items.Add(" PROGRAM TO PREPARE WEEKLY PAYROLL ")
+        ListBox1.Items.Add(" ")
+        ListBox1.Items.Add(" CSAMPLE11:                                                  " & Today.ToShortDateString())
+        ListBox1.Items.Add(" ")
+        Dim mdata(,) As String = {{"Will Smith", 29, 40}, {"Sandra Bolk", 25, 40}, {"Luis Grull", 29, 30}, {"Maria Cruz", 20, 45}, {"Jason Memoa", 24, 40}}
+        ListBox1.Items.Add(String.Format(f, "EMPLOYEE NAME ", "RATE OF PAY ", "HOURS WORKED ", "GROSS PAY ", "DEDUCTIONS ", "NET PAY "))
+        ListBox1.Items.Add("_____________________________________________________________________________ ")
+        For I = 0 To mdata.GetUpperBound(0)
+            enm = mdata(I, 0)
+            pr = mdata(I, 1)
+            hw = mdata(I, 2)
+            If hw <= 40 Then
+                gp = pr * hw
+            ElseIf hw >= 40.01 And (hw <= 60) Then
+                ot = (hw - 40)
+                gp = (40 * pr) + (ot * pr * 1.5)
+            End If
+            ded = gp * (22 / 100)
+            np = gp - ded
+            ListBox1.Items.Add(String.Format(f, enm, pr, hw, gp, ded, np))
+        Next I
+    End Sub
+End Class
+
